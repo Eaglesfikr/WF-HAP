@@ -4,7 +4,7 @@ from torch.utils.data import TensorDataset, DataLoader
 from DF import *
 from tqdm import tqdm
 import os
-train = np.load("awf1_high.npz")
+train = np.load("awf2_high.npz")
 device = "cuda"
 
 x_train = train["feature"].astype(np.float32)
