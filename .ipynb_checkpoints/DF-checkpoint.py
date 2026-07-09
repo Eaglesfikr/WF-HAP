@@ -1,4 +1,6 @@
 from torch import nn
+import torch
+import torch.nn.functional as F
 class DFNet(nn.Module):
     def __init__(self, out_dim):
         super(DFNet, self).__init__()
