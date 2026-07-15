@@ -39,7 +39,7 @@ class DFNet(nn.Module):
         self.dropout4 = nn.Dropout(p=0.1)
 
         
-        self.fc = nn.Linear(5120, out_dim)
+        self.fc = nn.Linear(10240, out_dim)
 
         
     def weight_init(self):

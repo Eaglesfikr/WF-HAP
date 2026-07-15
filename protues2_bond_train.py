@@ -4,11 +4,11 @@ from torch.utils.data import TensorDataset, DataLoader
 from DF import *
 from tqdm import tqdm
 import os
-train = np.load("protuestrain_high.npz")
+train = np.load("./datasets/proteus_train_sign.npz")
 device = "cuda"
 
-x_train = train["feature"].astype(np.float32)
-y_train = train["label"].astype(np.int64)
+x_train = train["X"].astype(np.float32)
+y_train = train["y"].astype(np.int64)
 
 print(x_train.shape)
 print(y_train.shape)
@@ -97,5 +97,5 @@ for epoch in range(epochs):
 os.makedirs("checkpoints", exist_ok=True)
 torch.save(
         model.state_dict(),
-        "checkpoints/protues_high.pth"
+        "checkpoints/protues_all.pth"
     )

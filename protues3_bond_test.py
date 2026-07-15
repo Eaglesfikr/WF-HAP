@@ -9,10 +9,10 @@ device = "cuda"
 #############################
 # 读取测试集
 #############################
-test = np.load("protuesday90_high.npz")
+test = np.load("./datasets/proteus_day90_sign.npz")
 
-x_test = test["feature"].astype(np.float32)
-y_test = test["label"].astype(np.int64)
+x_test = test["X"].astype(np.float32)
+y_test = test["y"].astype(np.int64)
 
 print(x_test.shape)
 print(y_test.shape)
@@ -35,7 +35,7 @@ testloader = DataLoader(
 model = DFNet(out_dim=102)
 
 model.load_state_dict(torch.load(
-    "checkpoints/protues_high.pth",
+    "checkpoints/protues_all.pth",
     map_location=device
 ))
 

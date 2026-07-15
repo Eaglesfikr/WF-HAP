@@ -1,0 +1,401 @@
++-----------------------------------------------AutoDL-----------------------------------------------------+
+[32m目录说明:[0m
+╔═════════════════╦════════╦════╦═════════════════════════════════════════════════════════════════════════╗
+║目录             ║名称    ║速度║说明                                                                     ║
+╠═════════════════╬════════╬════╬═════════════════════════════════════════════════════════════════════════╣
+║/                ║系 统 盘║一般║实例关机数据不会丢失，可存放代码等。会随保存镜像一起保存。               ║
+║/root/autodl-tmp ║数 据 盘║ 快 ║实例关机数据不会丢失，可存放读写IO要求高的数据。但不会随保存镜像一起保存 ║
+║/root/autodl-fs  ║文件存储║一般║可以实现多实例间的文件同步共享，不受实例开关机和保存镜像的影响。         ║
+╚═════════════════╩════════╩════╩═════════════════════════════════════════════════════════════════════════╝
+[32mCPU[0m ：16 核心
+[32m内存[0m：62 GB
+[32mGPU [0m：NVIDIA GeForce RTX 4080 SUPER, 1
+[32m存储[0m：
+[32m  系 统 盘/               [0m：22% 6.6G/30G
+[32m  数 据 盘/root/autodl-tmp[0m：82% 41G/50G
+[32m  文件存储/root/autodl-fs [0m：0% 0/200G
++----------------------------------------------------------------------------------------------------------+
+[31m*注意: [0m
+[31m1.系统盘较小请将大的数据存放于数据盘或文件存储中，重置系统时数据盘和文件存储中的数据不受影响[0m
+[31m2.清理系统盘请参考：https://www.autodl.com/docs/qa1/[0m
+[31m3.终端中长期执行命令请使用screen等工具开后台运行，确保程序不受SSH连接中断影响：https://www.autodl.com/docs/daemon/[0m
+[?2004h(base) root@autodl-container-5b454795f3-e143ba4f:~/autodl-tmp/WF-HAP# conda activate wf
+[?2004l[?2004h(wf) root@autodl-container-5b454795f3-e143ba4f:~/autodl-tmp/WF-HAP# python WFHAP4_test.py 
+[?2004l
+==================== Experiment 1/1 ====================
+Epoch 0
+Time Acc: 0.48% | Freq Acc: 1.03%
+Epoch 1
+Epoch 2
+Epoch 3
+Epoch 4
+Epoch 5
+Epoch 6
+Epoch 7
+Epoch 8
+Epoch 9
+Epoch 10
+Time Acc: 0.48% | Freq Acc: 1.03%
+Epoch 11
+Epoch 12
+Epoch 13
+Epoch 14
+Epoch 15
+Epoch 16
+Epoch 17
+Epoch 18
+Epoch 19
+Epoch 20
+Time Acc: 0.48% | Freq Acc: 1.03%
+Epoch 21
+Epoch 22
+Epoch 23
+Epoch 24
+Epoch 25
+Epoch 26
+Epoch 27
+Epoch 28
+Epoch 29
+Epoch 30
+Time Acc: 0.48% | Freq Acc: 1.03%
+Epoch 31
+Epoch 32
+Epoch 33
+Epoch 34
+^CTraceback (most recent call last):
+  File "WFHAP4_test.py", line 269, in <module>
+    cur_freq_acc = test_branch(model_freq, test_loader)
+  File "WFHAP4_test.py", line 218, in test_branch
+    for T_input, F_input, label in dataloader:
+  File "/root/.local/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 630, in __next__
+    data = self._next_data()
+  File "/root/.local/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 673, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/root/.local/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/root/.local/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "WFHAP4_test.py", line 150, in __getitem__
+    return self.T_data[idx], self.F_data[idx], self.label[idx]
+KeyboardInterrupt
+
+[?2004h(wf) root@autodl-container-5b454795f3-e143ba4f:~/autodl-tmp/WF-HAP# python WFHAP4_test.py 
+[?2004l
+==================== Experiment 1/1 ====================
+Epoch 0
+Batch Loss: 2.994968
+Batch Loss: 3.043793
+Time Acc: 9.07% | Freq Acc: 2.55%
+Epoch 1
+Batch Loss: 1.102619
+Batch Loss: 2.913859
+Epoch 2
+Batch Loss: 0.524527
+Batch Loss: 1.748199
+Epoch 3
+Batch Loss: 0.150976
+Batch Loss: 1.085075
+Epoch 4
+Batch Loss: 0.088571
+Batch Loss: 0.719212
+Epoch 5
+Batch Loss: 0.021984
+Batch Loss: 0.636158
+Epoch 6
+Batch Loss: 0.011908
+Batch Loss: 0.340667
+Epoch 7
+Batch Loss: 0.010426
+Batch Loss: 0.312437
+Epoch 8
+Batch Loss: 0.002959
+Batch Loss: 0.311401
+Epoch 9
+Batch Loss: 0.001406
+Batch Loss: 0.215262
+Epoch 10
+Batch Loss: 0.009470
+Batch Loss: 0.162017
+Time Acc: 9.34% | Freq Acc: 7.68%
+Epoch 11
+Batch Loss: 0.056891
+Batch Loss: 0.225082
+Epoch 12
+Batch Loss: 0.001302
+Batch Loss: 0.065742
+Epoch 13
+Batch Loss: 0.003930
+Batch Loss: 0.278873
+Epoch 14
+Batch Loss: 0.033467
+Batch Loss: 0.112867
+Epoch 15
+Batch Loss: 0.001676
+Batch Loss: 0.018277
+Epoch 16
+Batch Loss: 0.033072
+Batch Loss: 0.040351
+Epoch 17
+Batch Loss: 0.003884
+Batch Loss: 0.032017
+Epoch 18
+Batch Loss: 0.031903
+Batch Loss: 0.068063
+Epoch 19
+Batch Loss: 0.057245
+Batch Loss: 0.018374
+Epoch 20
+Batch Loss: 0.011569
+Batch Loss: 0.004007
+Time Acc: 10.11% | Freq Acc: 8.01%
+Epoch 21
+Batch Loss: 0.001516
+Batch Loss: 0.041035
+Epoch 22
+Batch Loss: 0.037210
+Batch Loss: 0.009078
+Epoch 23
+Batch Loss: 0.008919
+Batch Loss: 0.004153
+Epoch 24
+Batch Loss: 0.004306
+Batch Loss: 0.036364
+Epoch 25
+Batch Loss: 0.000428
+Batch Loss: 0.056883
+Epoch 26
+Batch Loss: 0.000485
+Batch Loss: 0.007068
+Epoch 27
+Batch Loss: 0.000428
+Batch Loss: 0.047111
+Epoch 28
+Batch Loss: 0.000862
+Batch Loss: 0.011620
+Epoch 29
+Batch Loss: 0.000464
+Batch Loss: 0.034387
+Epoch 30
+Batch Loss: 0.000226
+Batch Loss: 0.003349
+Time Acc: 10.37% | Freq Acc: 7.87%
+Epoch 31
+Batch Loss: 0.000269
+Batch Loss: 0.001943
+Epoch 32
+Batch Loss: 0.000503
+Batch Loss: 0.008258
+Epoch 33
+Batch Loss: 0.000097
+Batch Loss: 0.001400
+Epoch 34
+Batch Loss: 0.000270
+Batch Loss: 0.001398
+Epoch 35
+Batch Loss: 0.000173
+Batch Loss: 0.000557
+Epoch 36
+Batch Loss: 0.000191
+Batch Loss: 0.000478
+Epoch 37
+Batch Loss: 0.000038
+Batch Loss: 0.000643
+Epoch 38
+Batch Loss: 0.000085
+Batch Loss: 0.001603
+Epoch 39
+Batch Loss: 0.000017
+Batch Loss: 0.000736
+Epoch 40
+Batch Loss: 0.000021
+Batch Loss: 0.000385
+Time Acc: 10.51% | Freq Acc: 8.08%
+Epoch 41
+Batch Loss: 0.000041
+Batch Loss: 0.000759
+Epoch 42
+Batch Loss: 0.000014
+Batch Loss: 0.000328
+Epoch 43
+Batch Loss: 0.000009
+Batch Loss: 0.000349
+Epoch 44
+Batch Loss: 0.000005
+Batch Loss: 0.000108
+Epoch 45
+Batch Loss: 0.000010
+Batch Loss: 0.000759
+Epoch 46
+Batch Loss: 0.000009
+Batch Loss: 0.000384
+Epoch 47
+Batch Loss: 0.000007
+Batch Loss: 0.000478
+Epoch 48
+Batch Loss: 0.000002
+Batch Loss: 0.000271
+Epoch 49
+Batch Loss: 0.000002
+Batch Loss: 0.000279
+Epoch 50
+Batch Loss: 0.000003
+Batch Loss: 0.000320
+Time Acc: 10.42% | Freq Acc: 8.32%
+Epoch 51
+Batch Loss: 0.000002
+Batch Loss: 0.000669
+Epoch 52
+Batch Loss: 0.000003
+Batch Loss: 0.000163
+Epoch 53
+Batch Loss: 0.000001
+Batch Loss: 0.000171
+^[[A^[[A^[[A^[[A^[[A^[[A^[[A^[[AEpoch 54
+Batch Loss: 0.000013
+Batch Loss: 0.000217
+Epoch 55
+Batch Loss: 0.000028
+Batch Loss: 0.000190
+Epoch 56
+Batch Loss: 0.000002
+Batch Loss: 0.000765
+Epoch 57
+Batch Loss: 0.000003
+Batch Loss: 0.000134
+Epoch 58
+Batch Loss: 0.000002
+Batch Loss: 0.000135
+Epoch 59
+Batch Loss: 0.000003
+Batch Loss: 0.000078
+Epoch 60
+Batch Loss: 0.000004
+Batch Loss: 0.000100
+Time Acc: 10.51% | Freq Acc: 8.27%
+Epoch 61
+Batch Loss: 0.000002
+Batch Loss: 0.000112
+Epoch 62
+Batch Loss: 0.000003
+Batch Loss: 0.000117
+Epoch 63
+Batch Loss: 0.000001
+Batch Loss: 0.000175
+Epoch 64
+Batch Loss: 0.000001
+Batch Loss: 0.000127
+Epoch 65
+Batch Loss: 0.000001
+Batch Loss: 0.000101
+Epoch 66
+Batch Loss: 0.000001
+Batch Loss: 0.000080
+Epoch 67
+Batch Loss: 0.000000
+Batch Loss: 0.000965
+Epoch 68
+Batch Loss: 0.000004
+Batch Loss: 0.000419
+Epoch 69
+Batch Loss: 0.000006
+Batch Loss: 0.000103
+Epoch 70
+Batch Loss: 0.000002
+Batch Loss: 0.000115
+Time Acc: 10.49% | Freq Acc: 8.32%
+Epoch 71
+Batch Loss: 0.000001
+Batch Loss: 0.000103
+Epoch 72
+Batch Loss: 0.000006
+Batch Loss: 0.000116
+Epoch 73
+Batch Loss: 0.000002
+Batch Loss: 0.000083
+Epoch 74
+Batch Loss: 0.000001
+Batch Loss: 0.000284
+Epoch 75
+Batch Loss: 0.000004
+Batch Loss: 0.000087
+Epoch 76
+Batch Loss: 0.000000
+Batch Loss: 0.000644
+Epoch 77
+Batch Loss: 0.000001
+Batch Loss: 0.000077
+Epoch 78
+Batch Loss: 0.000008
+Batch Loss: 0.000351
+Epoch 79
+Batch Loss: 0.000002
+Batch Loss: 0.000062
+Epoch 80
+Batch Loss: 0.000001
+Batch Loss: 0.000164
+Time Acc: 10.49% | Freq Acc: 8.35%
+Epoch 81
+Batch Loss: 0.000001
+Batch Loss: 0.000564
+Epoch 82
+Batch Loss: 0.000000
+Batch Loss: 0.000087
+Epoch 83
+Batch Loss: 0.000004
+Batch Loss: 0.000077
+Epoch 84
+Batch Loss: 0.000003
+Batch Loss: 0.000141
+Epoch 85
+Batch Loss: 0.000005
+Batch Loss: 0.000130
+Epoch 86
+Batch Loss: 0.000001
+Batch Loss: 0.000130
+Epoch 87
+Batch Loss: 0.000000
+Batch Loss: 0.000103
+Epoch 88
+Batch Loss: 0.000005
+Batch Loss: 0.000053
+Epoch 89
+Batch Loss: 0.000001
+Batch Loss: 0.000052
+Epoch 90
+Batch Loss: 0.000000
+Batch Loss: 0.000058
+Time Acc: 10.50% | Freq Acc: 8.27%
+Epoch 91
+Batch Loss: 0.000002
+Batch Loss: 0.000162
+Epoch 92
+Batch Loss: 0.000002
+Batch Loss: 0.000065
+Epoch 93
+Batch Loss: 0.000002
+Batch Loss: 0.000075
+Epoch 94
+Batch Loss: 0.000022
+Batch Loss: 0.000085
+Epoch 95
+Batch Loss: 0.000001
+Batch Loss: 0.001846
+Epoch 96
+Batch Loss: 0.000001
+Batch Loss: 0.000073
+Epoch 97
+Batch Loss: 0.000002
+Batch Loss: 0.000108
+Epoch 98
+Batch Loss: 0.000001
+Batch Loss: 0.000101
+Epoch 99
+Batch Loss: 0.000000
+Batch Loss: 0.000111
+Round1 Best Result -> Time:10.77% Freq:8.37%
+----------------------------------------------------------------------
+
+==================== Final Average Result ====================
+Time Branch | Mean Acc: 10.8 %, Std: 0.0
+Freq Branch | Mean Acc: 8.4 %, Std: 0.0
+[?2004h(wf) root@autodl-container-5b454795f3-e143ba4f:~/autodl-tmp/WF-HAP# python WFHAP4_test.py [5Pconda activate wf[5Pscreen -r 53[2PlsL -Logfile WFHAP-train-log -dmS WHHAPTRAIN[K[16Ppython WFHAP3_train.py [3P1AUG[C[C[C[Cclear[Kpython WFHAP1AUG.py [3Pconda activate wfrm -rf protues_WFHAPaug.npz [14Pscreen -r 5336[4Plspython WFHAP4_test.py [5Pconda activate wfpython WFHAP4_test.py [10Pscreen -r 53ll checkpoints/[10Pcd ..screen -r 53[2Plsll[Krm -rf  *.npzll[KLLcd AWF/ls[Kcd datasets/l[Kcd artifacts/ls[Kcd ../Realistic-Website-Fingerprinting-By-Augmenting-Network-Traces/[K[3Pllrm -rf *.npz[1Pcd proteus/datasets/ls[Kcd T-DCWF/da..[Krm -f aw1_*.npzll[Krm -rf *.tarll[Kcd checkpoints/python ../exp/my_test-f.py[5P-f.py_test.py[5P.py[2Pconda activate wfls[Kconda activate wfpython ../exp/my.py_test.py[3P-f.py_test-f.py[11Pcd checkpoints/ll[Krm -rf *.tarll[Krm -f aw1_*.npz[10Pcd ..T-DCWF/da[Kls[Kcd datasets/[1Pproteus/rm -rf *.npzll[Kcd ../Realistic-Website-Fingerprinting-By-Augmenting-Network-Traces/ls[Kcd artifacts/l[Kcd datasets/ls[Kcd AWF/LL[Kllrm -rf  *.npzll[Kscreen -lsr 53[K[K[K[K[K[K[K[K[K[K[K[Kscreen -lsll[Krm -rf  *.npzll[KLLcd AWF/ls[Kcd datasets/l[Kcd artifacts/ls[Kcd ../Realistic-Website-Fingerprinting-By-Augmenting-Network-Traces/[K[3Pllrm -rf *.npz[1Pcd proteus/rm -rf *.npzll[Kcd ../Realistic-Website-Fingerprinting-By-Augmenting-Network-Traces/ls[Kcd artifacts/l[Kcd datasets/
