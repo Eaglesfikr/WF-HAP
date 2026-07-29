@@ -1,3 +1,7 @@
 datasets/
 checkpoints/
 *.npz
+
+checkpoints.zip
+datasets.zip
+.venv/

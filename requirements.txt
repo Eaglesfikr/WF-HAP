@@ -85,5 +85,8 @@ typing_extensions==4.13.2
 tzdata==2025.3
 urllib3==2.2.3
 wcwidth==0.6.0
+<<<<<<< Updated upstream
 WFlib @ file:///root/autodl-tmp/Adaptive-WF-Attack/wflib_copy
+=======
+>>>>>>> Stashed changes
 zipp==3.20.2
