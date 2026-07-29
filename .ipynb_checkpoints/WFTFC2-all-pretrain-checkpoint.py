@@ -39,7 +39,7 @@ print("Loading Time and Frequency domain datasets...")
 time_data_orig = np.load('./datasets/awf1.npz')
 time_data_aug = np.load('./datasets/awf1_aug2x.npz')
 x_time_orig = time_data_orig['feature']
-x_time_aug_full = time_data_aug['x_train']
+x_time_aug_full = time_data_aug['X']
 # 从增强数据中隔行取样
 x_time_aug = x_time_aug_full[::2]
 

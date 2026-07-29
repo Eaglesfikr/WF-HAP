@@ -43,11 +43,11 @@ temperature = 0.5
 n_views = 2
 num_epoches = 100
 
-data = np.load('./datasets/awf2.npz') 
-# x_train = data['feature'] #awf1
-# y_train = data['label']
-x_train = data['data'] #awf1
-y_train = data['labels']
+data = np.load('./datasets/awf1.npz') 
+x_train = data['feature'] #awf1
+y_train = data['label']
+# x_train = data['data'] #awf2
+# y_train = data['labels']
 print(x_train.shape)
 
 
@@ -141,14 +141,14 @@ class Augmentor():
         # 2. for incoming burst
         augmented_sizes = []
         for size in burst_sizes:
-            p = random.random()
-            if p > 0.5:
+            p1 = random.random()
+            if p1 > 0.5:
                     if size < -self.th_in:
                         u = random.random()   # 等价 U(0,1)
                         new_size = size * (1 + u * self.r_inc_in)
-                    elif size > self.th_out:
-                        u = random.random()
-                        new_size = size * (1 + u * self.r_inc_out)
+                    # elif size > self.th_out:
+                    #     u = random.random()
+                    #     new_size = size * (1 + u * self.r_inc_out)
                     else:
                         new_size = size
                         
@@ -156,7 +156,27 @@ class Augmentor():
                     if size <= -self.th_in:
                         u = random.random()
                         new_size = size * (1 - u * self.r_dec_in)
-                    elif size > self.th_out:
+                    # elif size > self.th_out:
+                    #     u = random.random()
+                    #     new_size = size * (1 - u * self.r_dec_out)
+                    else:
+                        new_size = size
+            p2 = random.random()
+            if p2 > 0.5:
+                    # if size < -self.th_in:
+                    #     u = random.random()   # 等价 U(0,1)
+                    #     new_size = size * (1 + u * self.r_inc_in)
+                    if size > self.th_out:
+                        u = random.random()
+                        new_size = size * (1 + u * self.r_inc_out)
+                    else:
+                        new_size = size
+                        
+            else:
+                    # if size <= -self.th_in:
+                    #     u = random.random()
+                    #     new_size = size * (1 - u * self.r_dec_in)
+                    if size > self.th_out:
                         u = random.random()
                         new_size = size * (1 - u * self.r_dec_out)
                     else:
@@ -293,24 +313,24 @@ for i in tqdm.tqdm(range(n_samples)):
     label = y_train[i]
     
     # 1. 时域增强
-    # trace_time_aug = augmentor.augment_time(trace)
+    trace_time_aug = augmentor.augment_time(trace)
     
     # 2. 获取原始频谱 (Log-Amplitude)
-    spec = augmentor.frequency_get(trace)
+    # spec = augmentor.frequency_get(trace)
     
     # 3. 频域增强 (直接传入计算好的 spec)
     # spec_aug = augmentor.augment_frequency(spec)
     
     # 存入数组
-    # x_time_aug[i] = trace_time_aug
-    x_freq[i] = spec
+    x_time_aug[i] = trace_time_aug
+    # x_freq[i] = spec
     # x_freq_aug[i] = spec_aug
     y_train_all[i] = label
     
 # 保存
 print("Saving augmented datasets...")
-# np.savez_compressed('./datasets/awf1_time_tfcaug.npz', x=x_time_aug, y=y_train_all)
-np.savez_compressed('./datasets/awf2_freq.npz', x=x_freq, y=y_train_all)
+np.savez_compressed('./datasets/awf1_time_tfcaug.npz', x=x_time_aug, y=y_train_all)
+# np.savez_compressed('./datasets/awf2_freq.npz', x=x_freq, y=y_train_all)
 # np.savez_compressed('./datasets/awf1_freq_tfcaug.npz', x=x_freq_aug, y=y_train_all)
 
 print("All done.")
