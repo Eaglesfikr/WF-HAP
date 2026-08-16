@@ -45,7 +45,7 @@ x_time_aug = x_time_aug_full[::2]
 
 # --- 加载频域数据 ---
 freq_data_orig = np.load('./datasets/awf1_freq.npz')
-freq_data_aug = np.load('./datasets/awf1_freq_hapaug.npz')
+freq_data_aug = np.load('./datasets/awf1_freq_hapaug_v2.npz')
 x_freq_orig = freq_data_orig['x']
 x_freq_aug = freq_data_aug['x']
 
@@ -321,9 +321,9 @@ class NetCLR(object):
                 self.scheduler.step()
             
             # 保存模型
-            if epoch_counter % 20 == 0 and epoch_counter > 0:
+            if epoch_counter % 50 == 0 and epoch_counter > 0:
                 os.makedirs('./checkpoints/WFHAP/', exist_ok=True)
-                torch.save(self.model.state_dict(), f'./checkpoints/WFHAP/WFHAP_dual_domain_epoch_{epoch_counter}.pth.tar')
+                torch.save(self.model.state_dict(), f'./checkpoints/WFHAP/WFHAP_v729_epoch_{epoch_counter}.pth.tar')
 
 # ==========================================
 # 6. 主程序入口

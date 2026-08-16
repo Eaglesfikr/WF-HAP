@@ -6,4 +6,5 @@ checkpoints.zip
 datasets.zip
 .venv/
 
-log-tfc-all-with-tfctime-7.27
+log-tfc-all-with-tfctime-7.2
+log*

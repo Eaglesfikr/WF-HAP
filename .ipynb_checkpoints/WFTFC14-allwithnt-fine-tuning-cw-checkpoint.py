@@ -15,6 +15,22 @@ import tqdm
 import os
 from sklearn.model_selection import train_test_split
 
+import random
+import numpy as np
+import torch
+
+def set_seed(seed=42):
+    random.seed(seed)                  # Python
+    np.random.seed(seed)               # NumPy
+    torch.manual_seed(seed)            # CPU
+    torch.cuda.manual_seed(seed)       # 当前GPU
+    torch.cuda.manual_seed_all(seed)   # 所有GPU
+
+    # 保证卷积等操作可复现
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+# set_seed(42)
+
 # ==========================================
 # 1. 设备配置与参数设置
 # ==========================================
@@ -27,7 +43,7 @@ print(f"Device: {device}")
 batch_size = 16
 num_epoches = 100
 learning_rate = 0.0005
-pretrained_model_path = './checkpoints/WFHAP/WFHAP_v729_epoch_100.pth.tar' # 指向你预训练好的模型
+pretrained_model_path = './checkpoints/WFTFC/WFTFC_all_v810_epoch_100.pth.tar' # 指向你预训练好的模型
 
 # ==========================================
 # 2. 模型定义 (Backbone & 新的分类头)
@@ -312,5 +328,5 @@ for epoch in range(num_epoches):
         print(f"Epoch [{epoch+1}/{num_epoches}], Loss: {loss:.4f}, Test Acc: {acc:.2f}%")
 
 # 保存微调后的模型
-torch.save(model.state_dict(), './checkpoints/WFHAP/WFHAP_v729_finetuned.pth.tar')
+torch.save(model.state_dict(), './checkpoints/WFTFC/WFTFC_all_v810_finetuned.pth.tar')
 print("Fine-tuning completed and model saved.")

@@ -24,10 +24,10 @@ kwargs = {'num_workers': 4, 'pin_memory': True} if use_cuda else {}
 print(f"Device: {device}")
 
 # 微调超参数
-batch_size = 128
+batch_size = 16
 num_epoches = 100
 learning_rate = 0.0005
-pretrained_model_path = './checkpoints/WFHAP/WFHAP_dual_domain_epoch_100.pth.tar' # 指向你预训练好的模型
+pretrained_model_path = './checkpoints/WFHAP/WFHAP_v729_epoch_100.pth.tar' # 指向你预训练好的模型
 
 # ==========================================
 # 2. 模型定义 (Backbone & 新的分类头)
@@ -162,7 +162,7 @@ freq_data = np.load('./datasets/awf2_freq.npz') # 频域数据
 
 x_time_total = time_data['data']
 y_total = time_data['labels']
-x_freq_total = freq_data['x_freq']
+x_freq_total = freq_data['x']
 
 # 划分训练集和测试集
 x_time_train, x_time_test, x_freq_train, x_freq_test, y_train, y_test = train_test_split(
@@ -312,5 +312,5 @@ for epoch in range(num_epoches):
         print(f"Epoch [{epoch+1}/{num_epoches}], Loss: {loss:.4f}, Test Acc: {acc:.2f}%")
 
 # 保存微调后的模型
-torch.save(model.state_dict(), './checkpoints/WFHAP/WFHAP_dual_domain_finetuned.pth.tar')
+torch.save(model.state_dict(), './checkpoints/WFHAP/WFHAP_v729_finetuned.pth.tar')
 print("Fine-tuning completed and model saved.")
